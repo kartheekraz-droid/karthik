@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+@layer components {
+  .wrap {
+    @apply w-[min(1120px,calc(100%-40px))] mx-auto;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-[18px] py-3 font-bold no-underline cursor-pointer border-0;
+  }
+  .btn-navy {
+    @apply bg-navy text-white;
+  }
+  .btn-saffron {
+    @apply bg-saffron text-[#2a1400];
+  }
+  .btn-green {
+    @apply bg-green text-white;
+  }
+  .btn-line {
+    @apply bg-transparent text-navy border-2 border-navy;
+  }
+
+  .card {
+    @apply bg-white border border-line rounded-card p-[22px];
+  }
+
+  .kicker {
+    @apply text-saffron-deep font-bold tracking-[0.14em] uppercase text-xs mb-3;
+  }
+
+  .tag {
+    @apply inline-block px-[9px] py-[3px] rounded-full text-xs font-bold;
+  }
+  .tag-s {
+    @apply bg-saffron-tint text-saffron-deep;
+  }
+  .tag-g {
+    @apply bg-green-tint text-green-deep;
+  }
+  .tag-n {
+    @apply bg-navy-tint text-navy;
+  }
+  .tag-r {
+    @apply bg-[#fde8e6] text-red;
+  }
+
+  .step {
+    @apply bg-white border border-line rounded-xl px-[10px] py-3 text-center text-[13px] font-bold text-ink;
+  }
+  .step b {
+    @apply block text-[11px] text-muted font-semibold mb-1;
+  }
+  .step-s {
+    @apply bg-[#fff6ea];
+  }
+  .step-g {
+    @apply bg-[#e8f6e6];
+  }
+  .step-n {
+    @apply bg-[#ecefff];
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif leading-tight mb-3;
+  }
+  h1 {
+    font-size: clamp(32px, 4.4vw, 48px);
+  }
+  h2 {
+    @apply text-[28px];
+  }
+  p {
+    @apply text-muted mb-4;
+  }
+}
