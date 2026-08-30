@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+@layer components {
+  .wrap {
+    @apply w-[min(1120px,calc(100%-40px))] mx-auto;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-[18px] py-3 font-bold no-underline cursor-pointer border-0;
+  }
+  .btn-navy {
+    @apply bg-navy text-white;
+  }
+  .btn-saffron {
+    @apply bg-saffron text-[#2a1400];
+  }
+  .btn-green {
+    @apply bg-green text-white;
+  }
+  .btn-line {
+    @apply bg-transparent text-navy border-2 border-navy;
+  }
+
+  .card {
+    @apply bg-white border border-line rounded-card p-[22px];
+  }
+
+  .kicker {
+    @apply text-saffron-deep font-bold tracking-[0.14em] uppercase text-xs mb-3;
+  }
+
+  .tag {
+    @apply inline-block px-[9px] py-[3px] rounded-full text-xs font-bold;
+  }
+  .tag-s {
+    @apply bg-saffron-tint text-saffron-deep;
+  }
+  .tag-g {
+    @apply bg-green-tint text-green-deep;
+  }
+  .tag-n {
+    @apply bg-navy-tint text-navy;
+  }
+  .tag-r {
+    @apply bg-[#fde8e6] text-red;
+  }
+
+  .step {
+    @apply bg-white border border-line rounded-xl px-[10px] py-3 text-center text-[13px] font-bold text-ink;
+  }
+  .step b {
+    @apply block text-[11px] text-muted font-semibold mb-1;
+  }
+  .step-s {
+    @apply bg-[#fff6ea];
+  }
+  .step-g {
+    @apply bg-[#e8f6e6];
+  }
+  .step-n {
+    @apply bg-[#ecefff];
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif leading-tight mb-3;
+  }
+  h1 {
+    font-size: clamp(32px, 4.4vw, 48px);
+  }
+  h2 {
+    @apply text-[28px];
+  }
+  p {
+    @apply text-muted mb-4;
+  }
+
+  /* ---------- motion: card + image hover polish (additive, no layout change) ---------- */
+  .card {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 80, 0.12);
+    border-color: #c7c0ae;
+  }
+
+  .btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.04);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .thumb-wrap {
+    @apply relative overflow-hidden rounded-xl mb-3.5;
+  }
+  .thumb-wrap img {
+    @apply w-full h-full object-cover block transition-transform duration-[600ms] ease-out;
+  }
+  .card:hover .thumb-wrap img {
+    transform: scale(1.06);
+  }
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1.is-visible { transition-delay: 0.08s; }
+.reveal-delay-2.is-visible { transition-delay: 0.16s; }
+.reveal-delay-3.is-visible { transition-delay: 0.24s; }
+.reveal-delay-4.is-visible { transition-delay: 0.32s; }
+.reveal-delay-5.is-visible { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- route fade-in ---------- */
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.route-fade {
+  animation: route-fade-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------- chakra loader ---------- */
+@keyframes chakra-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.chakra-spin {
+  animation: chakra-spin 1.1s linear infinite;
+}
+
+@keyframes loader-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
+}
+.loader-hide {
+  animation: loader-fade-out 0.5s ease forwards;
+}
+
+/* ---------- skeleton loading shimmer ---------- */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #ece8de 25%, #f6f3ea 37%, #ece8de 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* ---------- gentle float for decorative art ---------- */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-slow {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+/* ---------- fade/scale-in for images once loaded ---------- */
+@keyframes img-pop-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.img-pop {
+  animation: img-pop-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------- authentication + interactive flex/card hover ---------- */
+.auth-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.auth-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 55px rgba(0, 0, 80, 0.14);
+  border-color: #ff9933;
+}
+.auth-role {
+  @apply flex items-center justify-center min-h-[58px] text-center border-2 border-line rounded-xl px-3 py-2.5 cursor-pointer text-xs font-bold bg-white;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+}
+.auth-role:hover {
+  transform: translateY(-3px);
+  border-color: #ff9933;
+  box-shadow: 0 10px 24px rgba(255, 153, 51, 0.16);
+  background: #fff8ee;
+}
+.auth-role-active {
+  border-color: #ff9933;
+  background: #fff4e6;
+  color: #7a3b00;
+  box-shadow: 0 8px 20px rgba(255, 153, 51, 0.14);
+}
+
+/* Dashboard boxes already use .card; steps and common interactive rows get the same lift. */
+.step,
+.hover-box {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.step:hover,
+.hover-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 80, 0.10);
+  border-color: #ff9933;
+}
